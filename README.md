@@ -1,7 +1,8 @@
 # asynchronous-exercise
 API URL = 'https://restcountries.com/v3.1/region/europe'
-example Response
 ```
+example Response
+
   [
     {
       name: {
