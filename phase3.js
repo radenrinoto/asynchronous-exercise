@@ -42,22 +42,6 @@ async function postUser({ userName, email }) {
 // postUser({userName: 'MUIZ', email: 'GOD@gmail.com'})
 
 // EDIT USER
-// async function putUser({ userName, email }) {
-//   try {
-//     const response = await fetch(`${BASE_URL}/users`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ userName, email }),
-//     });
-//     const data = await response.json();
-//     console.log("Succes >>>>", data);
-//   } catch (error) {
-//     console.log("Error >>>>>", error);
-//   }
-// }
-
 async function putUser({ userName, email, id }) {
   try {
     const response = await fetch(`${BASE_URL}/users/${id}`, {
