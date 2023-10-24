@@ -58,9 +58,9 @@ async function postUser({ userName, email }) {
 //   }
 // }
 
-async function putUser({ userName, email }) {
+async function putUser({ userName, email, id }) {
   try {
-    const response = await fetch(`${BASE_URL}/users`, {
+    const response = await fetch(`${BASE_URL}/users/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ async function putUser({ userName, email }) {
     console.log("Error >>>>>", error);
   }
 }
-// putUser({ userName: 'MUIZ', email: 'GOD@gmail.com' })
+putUser({ userName: 'MUIZ', email: 'GOD@gmail.com' }, 2)
 
 // DELETE USER 
 async function deleteUser(id) {
@@ -159,6 +159,6 @@ async function ballPrediction() {
     console.error(error);
   }
 }
-ballPrediction()
+// ballPrediction()
 
 
