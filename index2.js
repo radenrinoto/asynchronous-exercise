@@ -51,7 +51,7 @@ async function fetchEuropeData() {
 // Call the fetchEuropeData function directly
 fetchEuropeData()
     .then(data => {
-        console.log(JSON.stringify(data, null, 2));
+        console.log(JSON.stringify(data,null,2));
     })
     .catch(error => {
         console.error("An error occurred:", error);
