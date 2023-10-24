@@ -22,15 +22,8 @@ const fetchApi = async () => {
 
   const result = filteredData.map((item) => {
     const { name, status, subregion, population, languages, capital } = item;
-    const data = {
-      name,
-      status,
-      subregion,
-      population,
-      languages,
-      capital,
-    };
-    return data;
+    const output = { name, status, subregion, population, languages, capital };
+    return output;
   });
 
   console.log(result);
@@ -42,21 +35,26 @@ const exerciseTwo = async () => {
   const data = await getApi();
   const dataSliced = data.slice(0, 25);
 
-  const obj = {};
+  const KEY_REGION = ["Southeast Europe", "Central Europe", "Northern Europe"];
 
-  dataSliced.map((item) => {
-    if (!obj[item.subregion]) {
-      obj[item.subregion] = {
-        name: item.name,
-        status: item.status,
-        subregion: item.subregion,
-        population: item.population,
-        languages: item.languages,
-        capital: item.capital,
-      };
-    }
+  const dataFiltered = dataSliced.filter((country) => KEY_REGION.includes(country.subregion));
+
+  const filteredData = dataFiltered.map((item) => {
+    const { name, status, subregion, population, languages, capital } = item;
+    const output = { name, status, subregion, population, languages, capital };
+    return output;
   });
-  console.log(obj);
+
+  const result = {};
+
+  filteredData.forEach((country) => {
+    if (!result[country.subregion]) {
+      result[country.subregion] = [];
+    }
+    result[country.subregion].push(country);
+  });
+
+  console.log(result);
 };
 
 exerciseTwo();
