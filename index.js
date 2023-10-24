@@ -43,10 +43,7 @@ async function getApiPhase2() {
             if (!obj[subregion]) {
                 obj[subregion] = [];
             }
-
-            if (obj[subregion].length < 2) {
-                obj[subregion].push(entry);
-            }
+            obj[subregion].push(entry);
         });
 
         console.log(obj);
