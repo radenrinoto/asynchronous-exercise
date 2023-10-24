@@ -36,7 +36,7 @@ async function getApiPhase2() {
 
         const obj = {};
 
-        data.forEach(country => {
+        data.map(country => {
             const { subregion, name, population, capital, languages, status } = country;
             const entry = { name, status, subregion, population, languages, capital };
 
