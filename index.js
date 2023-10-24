@@ -4,12 +4,12 @@ const asyncFunction = async () => {
   try {
     const response = await fetch(API_URL);
     const respJson = await response.json();
-    const filterResp = respJson.filter((val) => {
+    const slicesResp = respJson.slice(0, 25);
+    const filterResp = slicesResp.filter((val) => {
       return val.subregion === "Central Europe";
     });
     const result = [];
-    const slicesResp = filterResp.slice(0, 25);
-    slicesResp.map((val) => {
+    filterResp.map((val) => {
       result.push({
         name: val.name,
         status: val.status,
