@@ -26,8 +26,7 @@ const getAllUsers = async () => {
 getAllUsers();
 
 const loginUser = async (data) => {
-  const loginUser = await callApi(`/login`, "POST", data);
-  const token = loginUser.token;
+  const { token } = await callApi(`/login`, "POST", data);
 
   let fakeCookie = {};
   if (token) {
