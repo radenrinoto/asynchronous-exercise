@@ -1,24 +1,6 @@
 const API = 'https://story-api.dicoding.dev/v1/';
 
-const token = ''
-
-function getAccessToken(){
-    return token;
-}
-
-function putAccessToken(tokenFromApi){
-    return token = tokenFromApi
-}
-
-async function fetchWithToken(url, options = {}){
-    return fetch(url, {
-        ...options,
-        headers: {
-          ...options.headers,
-          Authorization: `Bearer ${getAccessToken()}`,
-        },
-    });
-}
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLUozbWEzQmRENi1wemN4SkkiLCJpYXQiOjE2OTgxMzkyMzd9.Z1Ns_ZjKd1Tomw0gVpZe8PePGhtAD45nECemE6X8JEs'
 
 const dataRegister = {
     "name": "a",
@@ -64,8 +46,6 @@ async function login({email, password}){
 
     const responseJson = await response.json();
 
-    token = responseJson.loginResult.token
-
     if (responseJson.error === true) {
         console.log({ error: true , message: responseJson.message})
     }else{
@@ -74,3 +54,26 @@ async function login({email, password}){
 }
 
 // login(dataLogin)
+
+async function getListStoris(){
+    const response = await fetch(`${API}/stories`, {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const responseJson = await response.json()
+    if (responseJson.error === true) {
+        console.log({ error: true , message: responseJson.message})
+    }else{
+        console.log({ error: false, message: responseJson.loginResult, listStory: responseJson.listStory  })
+    }
+}
+
+getListStoris()
+
+
+
+
