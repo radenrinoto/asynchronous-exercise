@@ -21,7 +21,7 @@ const getEuropeanCountriesBySubRegion = async () => {
         capital,
       }));
     const countriesBySubRegion = {};
-    formattedCountries.forEach((country) => {
+    formattedCountries.map((country) => {
       if (!countriesBySubRegion[country.subregion]) {
         countriesBySubRegion[country.subregion] = [];
       }
