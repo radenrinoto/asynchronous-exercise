@@ -1,6 +1,6 @@
 const API = 'https://restcountries.com/v3.1/region/europe'
 
-// const { data } = await getData()
+
 
 async function getData(){
     const response = await fetch(`${API}`)
@@ -14,7 +14,7 @@ async function getData(){
         languages: item.languages,
         capital: item.capital
     }))
-    // console.log(filteredData)
+    
     
 
     const filteredSubRegion = filteredData.filter(item => item.subregion === 'Central Europe')
@@ -22,5 +22,5 @@ async function getData(){
     console.log(filteredSubRegion)
 }
 
-// getData()
+getData()
 
