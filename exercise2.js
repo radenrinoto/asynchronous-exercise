@@ -5,27 +5,26 @@ const asyncFunction = async () => {
     const response = await fetch(API_URL);
     const respJson = await response.json();
     const slicesResp = respJson.slice(0, 25);
-    const subregionArr = slicesResp.map((val) => {
-      return val.subregion;
-    });
-    const subregion = new Set(subregionArr);
+    const subregion = {
+      centralEurope: "Central Europe",
+      southEast: "Southeast Europe",
+      northenEurope: "Northern Europe",
+    };
     let obj = {};
-    subregion.forEach((val) => {
-      const filterBySubregion = slicesResp.filter((filterval) => {
-        return filterval.subregion === val;
-      });
-      const resultBySubregion = [];
-      filterBySubregion.map((val) => {
-        resultBySubregion.push({
-          name: val.name,
-          status: val.status,
-          subregion: val.subregion,
-          population: val.population,
-          language: val.languages,
-          capital: val.capital,
-        });
-      });
-      obj[val] = resultBySubregion;
+    Object.entries(subregion).forEach((val) => {
+      const resultBySubregion = slicesResp
+        .filter((filterval) => {
+          return filterval.subregion === val[1];
+        })
+        .map(({ name, status, subregion, population, languages, capital }) => ({
+          name,
+          status,
+          subregion,
+          population,
+          languages,
+          capital,
+        }));
+      obj[val[0]] = resultBySubregion;
     });
     console.log(obj);
   } catch (error) {

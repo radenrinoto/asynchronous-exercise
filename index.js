@@ -4,21 +4,19 @@ const asyncFunction = async () => {
   try {
     const response = await fetch(API_URL);
     const respJson = await response.json();
-    const slicesResp = respJson.slice(0, 25);
-    const filterResp = slicesResp.filter((val) => {
-      return val.subregion === "Central Europe";
-    });
-    const result = [];
-    filterResp.map((val) => {
-      result.push({
-        name: val.name,
-        status: val.status,
-        subregion: val.subregion,
-        population: val.population,
-        language: val.languages,
-        capital: val.capital,
-      });
-    });
+    const result = respJson
+      .slice(0, 25)
+      .filter((val) => {
+        return val.subregion === "Central Europe";
+      })
+      .map(({ name, status, subregion, population, languages, capital }) => ({
+        name,
+        status,
+        subregion,
+        population,
+        languages,
+        capital,
+      }));
     console.log(result);
   } catch (error) {
     console.log(error);
