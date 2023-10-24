@@ -1,8 +1,8 @@
 const URL_JSONPLACE = "https://jsonplaceholder.typicode.com";
 
-const callApi = async (params, method = "GET", body) => {
+const callApi = async (endpoint, method = "GET", body) => {
   try {
-    const res = await fetch(`${URL_JSONPLACE}${params}`, {
+    const res = await fetch(`${URL_JSONPLACE}${endpoint}`, {
       method: method,
       headers: {
         "Content-Type": "application/json",
@@ -20,8 +20,10 @@ const callApi = async (params, method = "GET", body) => {
 const getDataUsers = async () => {
   const getUser = await callApi("/users");
   console.log({ getUser });
-  return data;
+  return getUser;
 };
+
+getDataUsers();
 
 const postDataPosts = async (data) => {
   const user = await getDataUsers();
