@@ -1,93 +1,79 @@
-const BASE = 'https://calm-plum-jaguar-tutu.cyclic.app'
+const API = 'https://story-api.dicoding.dev/v1/';
 
-const myData = {
-    "todoName": "belajar fullstack",
-    "isComplete": false
-}
-const myUpdateData = {
-    "isComplete": true
-}
-const myDataError = {
-    "todoNameddd": "belajar fullstack",
-    "isCompletedddd": false
-}
-const myUpdateDataError = {
-    "isCompleted": true
-}
-async function getListData(){
-    const response = await fetch(`${BASE}/todos`);
-    const responseJson = await response.json()
-    try {
-        if (responseJson.code === 200) {
-            console.log("Data berhasil diambil:", responseJson);
-        } else {
-          console.log("Gagal mengambil data. Status respons:", response.status);
-        }
-      } catch (error) {
-        console.error("Terjadi kesalahan:", error);
-      }
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLUozbWEzQmRENi1wemN4SkkiLCJpYXQiOjE2OTgxMzkyMzd9.Z1Ns_ZjKd1Tomw0gVpZe8PePGhtAD45nECemE6X8JEs'
+
+const dataRegister = {
+    "name": "a",
+    "email": "a13@gmail.com",
+    "password": "12345678"
 }
 
-// getListData()
-
-async function postData({todoName, isComplete}){
-    try{
-        const response = await fetch(`${BASE}/todos`, {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({todoName, isComplete})
-        })
-        const responseData = await response.json();
-        // console.log(responseData.code)
-        if (responseData.code !== 200) {
-            console.log({ error: true, message: responseData.message })
-        }
-        
-        console.log({ error: false, data: responseData.data })
-    }catch(error){
-        console.log(error)
-    }
-}
-
-// postData(myData)
-
-
-async function updateData({isComplete}){
-    const response = await fetch(`${BASE}/todos/653772d3e1717f1836ea7201 `, {
-        method: 'PUT',
-        headers:{
+async function register({name, email, password}){
+    const response = await fetch(`${API}/register`, {
+        method: 'POST',
+        headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ isComplete})
-
-        
+        body: JSON.stringify({ name, email, password }),
     })
-    const responseData = await response.json();
-    // console.log(responseData.code)
-    if (responseData.code !== 200) {
-        console.log({ error: true, message: responseData.message })
+
+    const responseJson = await response.json();
+
+    // console.log(responseJson.error)
+
+    if (responseJson.error === true) {
+        console.log({ error: true , message: responseJson.message})
+    }else{
+        console.log({ error: false, message: responseJson.message })
     }
-        
-    console.log({ error: false, data: responseData.data })
 }
 
-// updateData(myUpdateData)
+// register(dataRegister)
 
-async function deleteData(id){
-    const response = await fetch(`${BASE}/todos/${id}`, {
-        method: 'DELETE',
-    })
-    const responseData = await response.json();
-    // console.log(responseData.code)
-    if (responseData.code !== 200) {
-        console.log({ error: true, message: responseData.message })
-    }
-        
-    console.log({ error: false, message: responseData.message })
+const dataLogin = {
+    "email": "a13@gmail.com",
+    "password": "12345678"
 }
 
-// deleteData('123')
+async function login({email, password}){
+    const response = await fetch(`${API}/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email, password})
+    })
+
+    const responseJson = await response.json();
+
+    if (responseJson.error === true) {
+        console.log({ error: true , message: responseJson.message})
+    }else{
+        console.log({ error: false, message: responseJson.loginResult })
+    }
+}
+
+// login(dataLogin)
+
+async function getListStoris(){
+    const response = await fetch(`${API}/stories`, {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    const responseJson = await response.json()
+    if (responseJson.error === true) {
+        console.log({ error: true , message: responseJson.message})
+    }else{
+        console.log({ error: false, message: responseJson.loginResult, listStory: responseJson.listStory  })
+    }
+}
+
+getListStoris()
+
+
 
 
