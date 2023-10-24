@@ -6,6 +6,7 @@ const getResponse = async () => {
         const filteredData = data
         .slice(0, 25)
         .filter(country => country.subregion === 'Central Europe');
+        
         const datas = filteredData.map(({ name, status, subregion, population, languages, capital }) => ({
             name,
             status,
