@@ -1,6 +1,8 @@
+const BASE_URL = 'https://restcountries.com'
+
 const getRegion = async () => {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/region/europe')
+    const response = await fetch(`${BASE_URL}/v3.1/region/europe`)
     const result = await response.json()
     const data = result
       .slice(0, 25)
@@ -21,10 +23,10 @@ const getRegion = async () => {
     console.log(error)
   }
 }
-getRegion()
+// getRegion()
 const getRegion2 = async () => {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/region/europe')
+    const response = await fetch(`${BASE_URL}/v3.1/region/europe`)
     const result = await response.json()
     const data = result.slice(0, 25).map(item => {
       const { name, status, subregion, population, languages, capital } = item
@@ -58,4 +60,4 @@ const getRegion2 = async () => {
     console.log(error)
   }
 }
-getRegion2()
+// getRegion2()
