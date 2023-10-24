@@ -3,23 +3,21 @@ const getResponse = async () => {
         const response = await fetch('https://restcountries.com/v3.1/region/europe')
         const data = await response.json()
 
-        let datas = []
-        for(let i = 0; i < 25; i++) {
-            let country = {}
-            if(data[i].subregion === 'Central Europe') {
-                country.name = data[i].name
-                country.status = data[i].status
-                country.subregion = data[i].subregion
-                country.population = data[i].population
-                country.language = data[i].languages
-                country.capital = data[i].capital
-                datas.push(country)
-            }
-        }
+        const filteredData = data
+        .slice(0, 25)
+        .filter(country => country.subregion === 'Central Europe');
+        const datas = filteredData.map(({ name, status, subregion, population, languages, capital }) => ({
+            name,
+            status,
+            subregion,
+            population,
+            language: languages,
+            capital
+        }));
         console.log(datas)
     } catch (error) {
-        console.log('error fetching data', error)
+        console.log('error fetching data', error);
     }
 }
 
-console.log(getResponse())
+getResponse()
