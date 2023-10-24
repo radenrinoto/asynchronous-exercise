@@ -1,60 +1,35 @@
-const createPost = async (title, body) => {
-  try {
-    const newPost = {
-      title,
-      body,
-    };
-    const config = {
-      method: 'POST',
-      body: JSON.stringify(newPost),
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    };
+const { fetchApiData } = require('./apiUtils');
 
-    const response = await fetch(
-      'https://jsonplaceholder.typicode.com/posts',
-      config
-    );
-    const createdPost = await response.json();
-    console.log('Created Post: ', createdPost);
-  } catch (error) {
-    console.error(`An error occurred while creating post: ${error.message}`);
-  }
+const createPost = async (title, body) => {
+  const config = {
+    method: 'POST',
+    body: JSON.stringify({ title, body }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  };
+
+  const createdPost = await fetchApiData('api1', 'posts', config);
+  console.log('Created Post: ', createdPost);
 };
 
 const editPostById = async (postId, body) => {
-  try {
-    const config = {
-      method: 'PATCH',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    };
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`,
-      config
-    );
-    const editedPost = await response.json();
-    console.log('Edited Post: ', editedPost);
-  } catch (error) {
-    console.error(`An error occurred while editing post: ${error.message}`);
-  }
+  const config = {
+    method: 'PATCH',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  };
+  const editedPost = await fetchApiData('api1', `posts/${postId}`, config);
+  console.log('Edited Post: ', editedPost);
 };
 
 const deletePostById = async (postId) => {
-  try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`,
-      { method: 'DELETE' }
-    );
-    console.log(
-      `Post Deleted. Status: ${response.status} ${response.statusText} `
-    );
-  } catch (error) {
-    console.error(`An error occurred while deleting post: ${error.message}`);
-  }
+  const config = { method: 'DELETE' };
+  const deletedPost = await fetchApiData('api1', `posts/${postId}`, config);
+  // console.log(`Post Deleted: ${deletedPost} `);
+  console.log(`Post ${postId} deleted successfully.`);
 };
 
 createPost('This is a new title', 'This is a new body');

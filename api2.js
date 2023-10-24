@@ -1,13 +1,17 @@
+const { fetchApiData } = require('./apiUtils');
+
 async function fetchPokemonData() {
   try {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=25');
-    const data = await response.json();
+    const { results } = await fetchApiData('api2', 'pokemon?limit=25');
 
     const pokemonData = {};
 
-    for (const pokemon of data.results) {
-      const pokemonResponse = await fetch(pokemon.url);
-      const pokemonDetails = await pokemonResponse.json();
+    for (const pokemon of results) {
+      const pokemonResponse = await fetchApiData(
+        'api2',
+        `pokemon/${pokemon.name}`
+      );
+      const pokemonDetails = pokemonResponse;
 
       const characteristics = await fetchCharacteristics(pokemonDetails.id);
 
@@ -29,11 +33,9 @@ async function fetchPokemonData() {
 
 async function fetchCharacteristics(pokemonId) {
   try {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/characteristic/${pokemonId}/`
-    );
-    const data = await response.json();
-    return data.descriptions[7].description;
+    const response = await fetchApiData('api2', `characteristic/${pokemonId}`);
+    const data = response.descriptions[7].description;
+    return data;
   } catch (error) {
     console.error(
       `Failed to fetch pokemon's characteristics: ${error.message}`

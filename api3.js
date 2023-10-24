@@ -1,66 +1,46 @@
+const { fetchApiData } = require('./apiUtils');
+
 const getProductsByRating = async (minRating) => {
-  try {
-    const response = await fetch('https://fakestoreapi.com/products');
-    const data = await response.json();
+  const response = await fetchApiData('api3', 'products');
+  const data = response;
 
-    const filteredProducts = data.filter(
-      (product) => product.rating.rate >= minRating
-    );
+  const filteredProducts = data.filter(
+    (product) => product.rating.rate >= minRating
+  );
 
-    console.log('Products with rating equal to or above', minRating, ':');
-    console.log(filteredProducts);
-  } catch (error) {
-    console.error(`Failed to fetch products: ${error.message}`);
-  }
+  console.log('Products with a rating equal to or above', minRating, ':');
+  console.log(filteredProducts);
 };
 
 const createProduct = async (body) => {
-  try {
-    const config = {
-      method: 'POST',
-      body: JSON.stringify(body),
-    };
-    const response = await fetch('https://fakestoreapi.com/products', config);
-    const data = await response.json();
-    console.log('Product created: ', data);
-  } catch (error) {
-    console.error(`An error occurred while creating product: ${error.message}`);
-  }
+  const config = {
+    method: 'POST',
+    body: JSON.stringify(body),
+  };
+  const response = await fetchApiData('api3', 'products', config);
+  const data = response;
+  console.log('Product created: ', data);
 };
 
 const editProductById = async (productId, updatedProductData) => {
-  try {
-    const config = {
-      method: 'PATCH',
-      body: JSON.stringify(updatedProductData),
-    };
-    const response = await fetch(
-      `https://fakestoreapi.com/products/${productId}`,
-      config
-    );
-    const data = await response.json();
-    console.log('Product updated: ', data);
-  } catch (error) {
-    console.error(`An error occurred while updating product: ${error.message}`);
-  }
+  const config = {
+    method: 'PATCH',
+    body: JSON.stringify(updatedProductData),
+  };
+  const response = await fetchApiData('api3', `products/${productId}`, config);
+  const data = response;
+  console.log('Product updated: ', data);
 };
 
 const deleteProduct = async (productId) => {
-  try {
-    const config = {
-      method: 'DELETE',
-    };
-    const response = await fetch(
-      `https://fakestoreapi.com/products/${productId}`,
-      config
-    );
-    if (response.status === 200) {
-      console.log('Product deleted successfully.');
-    } else {
-      console.log('Product deletion failed.');
-    }
-  } catch (error) {
-    console.error(`An error occurred while deleting product: ${error.message}`);
+  const config = {
+    method: 'DELETE',
+  };
+  const response = await fetchApiData('api3', `products/${productId}`, config);
+  if (response.status === 200) {
+    console.log('Product deleted successfully.');
+  } else {
+    console.log('Product deletion failed.');
   }
 };
 
