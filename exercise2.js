@@ -8,7 +8,7 @@ const exercise2 = async (pageSize) => {
         if (result.length < pageSize) {
             console.log(result);
         } else {
-            const results = result.slice(0, pageSize)
+            const results = result.slice(0, pageSize) 
             const centralEurope = results.filter(item => item.subregion === 'Central Europe')
             const southEast = results.filter(item => item.subregion === 'Southeast Europe')
             const northernEurope = results.filter(item => item.subregion === 'Northern Europe')

@@ -1,12 +1,13 @@
 const dataAPI = 'https://restcountries.com/v3.1/region/europe'
 
+/* Parameter */
 const asynchronousExercise = async (pageSize, subRegion) => {
     try {
         const API = await fetch(dataAPI)
         const result = await API.json()
 
         if (result.length < pageSize) {
-            console.log(result);
+            console.log('Data Size undefined');
         } else {
             const results = result.slice(0, pageSize)
             const filterData = results.filter(item => subRegion.includes(item.subregion))
@@ -26,4 +27,4 @@ const asynchronousExercise = async (pageSize, subRegion) => {
     }
 }
 
-asynchronousExercise(25, 'Central Europe')
+asynchronousExercise(5, 'Central Europe')
