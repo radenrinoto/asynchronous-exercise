@@ -8,7 +8,7 @@ async function data() {
     );
     const data25Country = centralEurope.slice(0, 25);
     const result = data25Country.map(
-      ({name, status, subregion, population, languages, capital}) => ({
+      ({ name, status, subregion, population, languages, capital }) => ({
         name, status, subregion, population, languages, capital
       })
     );
@@ -17,9 +17,7 @@ async function data() {
     console.log("Error bre >>>", error);
   }
 }
-data()
-
-// response phase 2
+// data()
 
 async function response2() {
   try {
@@ -30,15 +28,23 @@ async function response2() {
     );
     const data25Country = centralEuropeCountry.slice(0, 25);
     const result = data25Country.map(
-      ({name, status, subregion, population, languages, capital}) => ({
+      ({ name, status, subregion, population, languages, capital }) => ({
         name, status, subregion, population, languages, capital
       })
     );
-    let obj = {centralEurope: {result}}
-    console.log("Success", obj); 
+    let obj = { centralEurope: { result } }
+    console.log("Success", obj);
   } catch (error) {
     console.log("Error", error);
   }
 }
+// response2()
 
-response2()
+const arr = [{ name: "run", loh: 'jdsndnj', hi: "njdjwbd" }]
+
+const res = arr.map(
+  ({ name, loh}) => ({ name, loh })
+)
+// const res = arr.map(ha => ha)
+
+console.log(res);
