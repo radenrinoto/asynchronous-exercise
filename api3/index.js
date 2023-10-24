@@ -64,9 +64,13 @@ async function login({email, password}){
 
     const responseJson = await response.json();
 
+    token = responseJson.loginResult.token
+
     if (responseJson.error === true) {
         console.log({ error: true , message: responseJson.message})
     }else{
         console.log({ error: false, message: responseJson.loginResult })
     }
 }
+
+// login(dataLogin)
