@@ -56,29 +56,29 @@ const deleteTodosData = async (id) => {
       method: "DELETE",
     });
     const result = await response.json();
-    return "Data Berhasil Dihapus";
+    return result;
   } catch (error) {
     console.log("message error: ", error);
   }
 };
 
-todos()
-  .then((resultData) => {
-    console.log(resultData);
-  })
-  .catch((error) => {
-    console.log("Error Message:", error);
-  });
+// todos()
+//   .then((resultData) => {
+//     console.log(resultData);
+//   })
+//   .catch((error) => {
+//     console.log("Error Message:", error);
+//   });
 
-addTodos()
-  .then((result) => {
-    console.log("Added Todos:", result);
-  })
-  .catch((error) => {
-    console.log("Error Message:", error);
-  });
+// addTodos()
+//   .then((result) => {
+//     console.log("Added Todos:", result);
+//   })
+//   .catch((error) => {
+//     console.log("Error Message:", error);
+//   });
 
-updateTodos("65378e49ccbb4400897369a6")
+updateTodos("65386ee51621ba8f57ee")
   .then((result) => {
     console.log("Updated Data: ", result);
   })
@@ -86,6 +86,10 @@ updateTodos("65378e49ccbb4400897369a6")
     console.log("Error Message:", error);
   });
 
-deleteTodosData("65378e49ccbb4400897369a6").catch((error) => {
-  console.log("Error Message:", error);
-});
+// deleteTodosData("65386ee51625d971ba8f57ee")
+//   .then((result) => {
+//     console.log("Deleted Data: ", result);
+//   })
+//   .catch((error) => {
+//     console.log("Error Message:", error);
+//   });

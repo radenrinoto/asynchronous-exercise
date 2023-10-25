@@ -7,7 +7,7 @@ const addUserData = {
 
 const updateUserData = {
   name: "Hiro",
-  job: "Magician",
+  job: "UI Designer",
 };
 
 const user = async () => {
